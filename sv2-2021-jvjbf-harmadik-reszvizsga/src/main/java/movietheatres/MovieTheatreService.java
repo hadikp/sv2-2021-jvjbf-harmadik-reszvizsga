@@ -68,7 +68,7 @@ public class MovieTheatreService {
         List<Movie> moviesLatest = new ArrayList<>();
         for(Map.Entry<String,List<Movie>> entries: shows.entrySet()){
             if((entries.getValue().contains(title))){
-               moviesLatest.add(entries.getValue().stream().map(p->p.getTitle()).filter(s->s.equals(title)).findFirst().orElseThrow());
+               moviesLatest.add(entries.getValue().stream().filter(s->s.getTitle().equals(title)).findFirst().orElseThrow());
             } else {
                 findLatestShowWithWrongName();
             }
