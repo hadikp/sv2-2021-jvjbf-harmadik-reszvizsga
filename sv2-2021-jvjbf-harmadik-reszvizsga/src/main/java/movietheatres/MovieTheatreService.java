@@ -67,7 +67,7 @@ public class MovieTheatreService {
     public LocalTime findLatestShow(String title){
         List<Movie> moviesLatest = new ArrayList<>();
         for(Map.Entry<String,List<Movie>> entries: shows.entrySet()){
-            if((entries.getValue().contains(title))){
+            if((entries.getValue().stream().anyMatch(s->s.getTitle().equals(title)))){
                moviesLatest.add(entries.getValue().stream().filter(s->s.getTitle().equals(title)).findFirst().orElseThrow());
             } else {
                 findLatestShowWithWrongName();
