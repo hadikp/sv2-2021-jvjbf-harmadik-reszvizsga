@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class MovieTheatreService {
 
@@ -37,14 +38,13 @@ public class MovieTheatreService {
                 if(shows.containsKey(cinema)){
                     List<Movie> cinemaname = shows.get(cinema);
                     cinemaname.add(movie);
-                    cinemaname.stream().sorted(Comparator.comparing(Movie::getStartTime));
+                    //List<Movie> movieLis = cinemaname.stream().sorted(Comparator.comparing(Movie::getStartTime)).toList();
                     shows.put(cinema,cinemaname);
 
                 }
                 if(!shows.containsKey(cinema)){
                     List<Movie> cinemaname = new ArrayList<>();
                     cinemaname.add(movie);
-                    cinemaname.stream().sorted(Comparator.comparing(Movie::getStartTime));
                     shows.put(cinema,cinemaname);
                 }
             }
@@ -57,7 +57,7 @@ public class MovieTheatreService {
     public List<String> findMovie(String title){
         List<String> movies = new ArrayList<>();
         for(Map.Entry<String,List<Movie>> entries: shows.entrySet()){
-            if((entries.getValue().stream().map(p->p.getTitle()).filter(f -> f.equals(title)))) {
+            if((entries.getValue().contains(title))) {
                 movies.add(entries.getKey());
             }
         }
@@ -68,7 +68,7 @@ public class MovieTheatreService {
         List<Movie> moviesLatest = new ArrayList<>();
         for(Map.Entry<String,List<Movie>> entries: shows.entrySet()){
             if((entries.getValue().contains(title))){
-               // moviesLatest.add(entries.getValue());
+               moviesLatest.add(entries.getValue().stream().map(p->p.getTitle()).filter(s->s.equals(title)).findFirst().orElse());
             } else {
                 findLatestShowWithWrongName();
             }
