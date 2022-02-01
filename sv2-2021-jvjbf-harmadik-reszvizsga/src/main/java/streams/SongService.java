@@ -23,8 +23,11 @@ public class SongService {
         return songs.stream().filter(s -> s.getTitle().equals(title)).collect(Collectors.toList());
     }
 
-    public boolean isPerformerInSong(Song song, String performer) {
-        return song.getPerformers().stream().anyMatch(f -> f.equals(performer));
+    public boolean isPerformerInSong(Song song, String name) {
+        //return song.getPerformers().stream().anyMatch(f -> f.equals(name));
+        return songs.stream().filter(s -> s.getTitle().equals(song.getTitle()))
+                .anyMatch(p -> p.getPerformers().contains(name));
+
     }
 
     public List<String> titlesBeforeDate (LocalDate date) {
