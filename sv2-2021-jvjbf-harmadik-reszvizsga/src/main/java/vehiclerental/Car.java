@@ -15,11 +15,7 @@ public class Car implements Rentable {
 
     @Override
     public int calculateSumPrice(long minutes) {
-        if (getRentingTime() == null) {
-            throw new IllegalStateException("Can't null a time!");
-        } else {
-            return rentingTime.getMinute() * minutesFee;
-        }
+            return (int) minutes * minutesFee;
     }
 
     @Override

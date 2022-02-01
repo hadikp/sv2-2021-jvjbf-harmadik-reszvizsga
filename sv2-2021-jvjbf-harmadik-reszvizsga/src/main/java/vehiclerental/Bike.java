@@ -14,11 +14,7 @@ public class Bike implements Rentable {
 
     @Override
     public int calculateSumPrice(long minutes) {
-        if (getRentingTime() == null) {
-             throw new IllegalStateException("Can't null a time!");
-        } else {
-            return rentingTime.getMinute() * MINUTES_FEE;
-        }
+            return (int) (minutes * MINUTES_FEE);
     }
 
     @Override

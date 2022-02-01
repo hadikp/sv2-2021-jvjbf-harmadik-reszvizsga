@@ -110,5 +110,10 @@ class RentServiceTest {
         assertNull(car.getRentingTime());
     }
 
+    @Test
+    void my() {
+        rentService.rent(user1, car, LocalTime.of(13, 16));
+    }
+
 
 }

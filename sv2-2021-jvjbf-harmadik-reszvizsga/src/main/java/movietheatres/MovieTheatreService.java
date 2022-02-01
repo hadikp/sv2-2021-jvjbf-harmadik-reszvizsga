@@ -69,6 +69,7 @@ public class MovieTheatreService {
         for(Map.Entry<String,List<Movie>> entries: shows.entrySet()){
             if((entries.getValue().stream().anyMatch(s->s.getTitle().equals(title)))){
                moviesLatest.add(entries.getValue().stream().filter(s->s.getTitle().equals(title)).findFirst().orElseThrow());
+              return moviesLatest.stream().sorted().findFirst().orElseThrow().getStartTime();
             } else {
                 findLatestShowWithWrongName();
             }

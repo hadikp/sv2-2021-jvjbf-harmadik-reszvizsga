@@ -24,7 +24,7 @@ public class SongService {
     }
 
     public boolean isPerformerInSong(Song song, String performer) {
-        return songs.stream().anyMatch(s -> s.getPerformers().contains(performer) && s.getPerformers().contains(song));
+        return song.getPerformers().stream().anyMatch(f -> f.equals(performer));
     }
 
     public List<String> titlesBeforeDate (LocalDate date) {

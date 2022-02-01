@@ -30,7 +30,8 @@ public class RentService {
         if (rentable.getRentingTime() != null) {
             throw new IllegalStateException("The vehicle isn't empty!");
         } else if (user.getBalance() >= rentable.calculateSumPrice(180)) {
-            throw new IllegalStateException("User is'tn enough money!");
+            System.out.println(rentable.calculateSumPrice(180));
+            throw new IllegalStateException("User isn't enough money!");
         } else {
             rentable.rent(time);
             actualRenting.put(rentable, user);
